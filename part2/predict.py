@@ -21,14 +21,11 @@ category_names_dict = in_arg.category_names
 
 gpu = in_arg.gpu
 
-if gpu:
-    device = torch.device('cuda')
-else:
-    device = torch.device('cpu')
+device = torch.device('cuda' if torch.cuda.is_available() and gpu else 'cpu')
 
 import json
 with open(category_names_dict, 'r') as f:
-    cat_to_name = json.load(f)
+    cat_to_name = json.load(f, strict=False)
 
     
 
